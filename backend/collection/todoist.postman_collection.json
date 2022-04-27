@@ -1,0 +1,1296 @@
+{
+	"info": {
+		"_postman_id": "910fc769-a085-42fd-bc61-f31d69575660",
+		"name": "todoist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Validate Content-Type",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}",
+							"host": [
+								"{{project_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Projects Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate Content-Type is present",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Check body content",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{wrong_project_url}}",
+							"host": [
+								"{{wrong_project_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate Content-Type is present",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Get Project ID and save it as environment variable",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"project_id\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Shopping List\",\n    \"comment_count\": 10,\n    \"order\": 1,\n    \"color\": 47,\n    \"shared\": false,\n    \"favorite\": false,\n    \"parent_id\": 220325187,\n    \"team_inbox\": false,\n    \"inbox_project\": false,\n    \"url\": \"https://todoist.com/showProject?id=2203306141\"\n}"
+						},
+						"url": {
+							"raw": "{{project_url}}",
+							"host": [
+								"{{project_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Project Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate pages does not exists",
+									"pm.test(\"Page does not exists\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "$(uuidgen)",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2203306141,\n    \"name\": \"Grocery Store List\",\n    \"comment_count\": 10,\n    \"order\": 1,\n    \"color\": 47,\n    \"shared\": false,\n    \"favorite\": false,\n    \"parent_id\": 220325187,\n    \"team_inbox\": false,\n    \"inbox_project\": false,\n    \"url\": \"https://todoist.com/showProject?id=2203306141\"\n}"
+						},
+						"url": {
+							"raw": "{{wrong_project_url}}",
+							"host": [
+								"{{wrong_project_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Project 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Get and check project name",
+									"pm.test(\"Check Project Name is Shopping List\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Shopping List\");",
+									"});",
+									"",
+									"// Get and check project ID",
+									"pm.test(\"Check Project ID\", function () {",
+									"    var expected_project_id = pm.environment.get(\"project_id\");",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(expected_project_id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}/{{project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Project 1 Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate body",
+									"pm.test(\"Body is Not Found\", function () {",
+									"    pm.response.to.have.body(\"Not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}/{{wrong_project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{wrong_project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Things To Buy\",\n    \"color\": 36\n}"
+						},
+						"url": {
+							"raw": "{{project_url}}/{{project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Project 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Get and check project name",
+									"pm.test(\"Check Project Name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Things To Buy\");",
+									"});",
+									"",
+									"// Get and check project ID",
+									"pm.test(\"Check Project ID\", function () {",
+									"    var expected_project_id = pm.environment.get(\"project_id\");",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(expected_project_id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}/{{project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Project Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body is Not found",
+									"pm.test(\"Body is Not Found\", function () {",
+									"    pm.response.to.have.body(\"Project not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Things To Buy\"\n}"
+						},
+						"url": {
+							"raw": "{{project_url}}/{{wrong_project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{wrong_project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}/{{project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8581086a71b17dbc711e13d8d082b52b408a2b13",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{project_url}}/{{wrong_project_id}}",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"{{wrong_project_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get Active Tasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Validate Content-Type is present",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}",
+							"host": [
+								"{{task_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Tasks Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Get and check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check Content-Type is present",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Check body content",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{wrong_task_url}}",
+							"host": [
+								"{{wrong_task_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"// Check Content-Type is present",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// Get Project ID and save it as environment variable",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"task_id\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment_count\": 0,\n    \"completed\": false,\n    \"content\": \"Present QA Challenge\",\n    \"description\": \"\",\n    \"due\": {\n        \"date\": \"2016-09-01\",\n        \"datetime\": \"2016-09-01T11:00:00Z\",\n        \"recurring\": false,\n        \"string\": \"2017-07-01 12:00\",\n        \"timezone\": \"Mexico City\"\n    },\n    \"id\": 2995104339,\n    \"order\": 1,\n    \"priority\": 4,\n    \"project_id\": 2203306141,\n    \"section_id\": 7025,\n    \"parent_id\": 2995104589,\n    \"url\": \"https://todoist.com/showTask?id=2995104339\"\n}"
+						},
+						"url": {
+							"raw": "{{task_url}}",
+							"host": [
+								"{{task_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate page does not exists",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment_count\": 0,\n    \"completed\": false,\n    \"content\": \"Present QA Challenge\",\n    \"description\": \"\",\n    \"due\": {\n        \"date\": \"2016-09-01\",\n        \"datetime\": \"2016-09-01T11:00:00Z\",\n        \"recurring\": false,\n        \"string\": \"2017-07-01 12:00\",\n        \"timezone\": \"Europe/Lisbon\"\n    },\n    \"id\": 2995104339,\n    \"order\": 1,\n    \"priority\": 4,\n    \"project_id\": 2203306141,\n    \"section_id\": 7025,\n    \"parent_id\": 2995104589,\n    \"url\": \"https://todoist.com/showTask?id=2995104339\"\n}"
+						},
+						"url": {
+							"raw": "{{wrong_task_url}}",
+							"host": [
+								"{{wrong_task_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get An Active Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Get and check task name",
+									"pm.test(\"Check Task Name is Present QA Challenge\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.content).to.eql(\"Present QA Challenge\");",
+									"});",
+									"",
+									"// Get and check project ID",
+									"pm.test(\"Check Task ID\", function () {",
+									"    var expected_task_id = pm.environment.get(\"task_id\");",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(expected_task_id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{task_id}}",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get An Active Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body Not found",
+									"pm.test(\"Body is Not Found\", function () {",
+									"    pm.response.to.have.body(\"Not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{wrong_task_id}}",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{wrong_task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"content\": \"Buy Coffee And Milk\"}"
+						},
+						"url": {
+							"raw": "{{task_url}}/{{task_id}}",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body Not found",
+									"pm.test(\"Task is Not Found\", function () {",
+									"    pm.response.to.have.body(\"Task not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"content\": \"Buy Coffee And Milk\"}"
+						},
+						"url": {
+							"raw": "{{task_url}}/{{wrong_task_id}}",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{wrong_task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close A Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 700ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(700);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{task_id}}/close",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{task_id}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close A Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Validate pages does not exists",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{wrong_task_url}}/{{task_id}}/close",
+							"host": [
+								"{{wrong_task_url}}"
+							],
+							"path": [
+								"{{task_id}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reopen A Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{task_id}}/reopen",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{task_id}}",
+								"reopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reopen A Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"// Check body Not found",
+									"pm.test(\"Task is Not Found\", function () {",
+									"    pm.response.to.have.body(\"Task not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{wrong_task_id}}/reopen",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{wrong_task_id}}",
+								"reopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 700ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(700);",
+									"});",
+									"",
+									"// Check body is empty",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.have.body(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8581086a71b17dbc711e13d8d082b52b408a2b13",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{task_url}}/{{task_id}}",
+							"host": [
+								"{{task_url}}"
+							],
+							"path": [
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Task Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get status code",
+									"pm.test(\"Status code is 404 No Content\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"// Check response time",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Sorry, the page you're looking for isn’t here anymore\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{wrong_task_url}}/{{wrong_task_id}}",
+							"host": [
+								"{{wrong_task_url}}"
+							],
+							"path": [
+								"{{wrong_task_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
