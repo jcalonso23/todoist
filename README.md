@@ -2,40 +2,43 @@
 QA Challenge
 
 ## Pre-requisites
-Install the following packages
+
+- Go to https://nodejs.org/en/download/ and download the Node.js source code for your platform.
+
+- Go to https://www.postman.com/downloads/ and download the Postman app for your platform.
+
+- Create the following file structure:
 
 ```bash
-# Go to https://nodejs.org/en/download/ and download the Node.js source code for your platform.
-
-# Go to https://www.postman.com/downloads/ and download the Postman app for your platform.
-
-# Create the file structure
 todoist/
   | backend/
      | collection/
      | environment/
      | reports/
   | frontend/
+```
 
-# Install newman
+- Install newman
+```bash
 $ cd todoist/
 $ npm install -g newman
+```
 
-# Install Playwright
+- Install Playwright
+```bash
 $ cd todoist/frontend/
 $ npm init playwright@latest
 ```
 
 ## Configuration
 
+Initialize the package
 ```bash
-# Initialize the package
 $ cd todoist/
 $ npm init
-
-# Several questions will be prompted
-# A package.json will be created with a dummy test
 ```
+- Several questions will be prompted
+- A package.json will be created with a dummy test
 
 ## Execute tests
 
@@ -44,22 +47,20 @@ $ npm init
 - From Todoist app get the Authorization Token
 - Create endpoints for projects and tasks
 - Define environment variables
-- Export collections and save it in ```bash todoist/collection/```
-- Export enviroment and save it in ```bash todoist/enviroment/```
+- Export collections and save it in ```todoist/collection/```
+- Export enviroment and save it in ```todoist/enviroment/```
 
+To execute tests:
 ```bash
 $ cd todoist/
-
-# To execute tests
 $ npm run testBackend
 ```
 
 ### Frontend Tests
 
+To execute tests:
 ```bash
 $ cd todoist/
-
-# To execute tests
 $ npm tun testFrontend01
 $ npm tun testFrontend02
 $ npm tun testFrontend03
