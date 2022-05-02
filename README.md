@@ -38,7 +38,7 @@ $ cd todoist/
 $ npm init
 ```
 - Several questions will be prompted
-- A package.json will be created with a dummy test
+- A ```package.json``` will be created with a dummy test
 
 ## Execute tests
 
