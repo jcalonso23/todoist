@@ -30,6 +30,13 @@ $ cd todoist/frontend/
 $ npm init playwright@latest
 ```
 
+- Install ESLint
+```bash
+$ cd todoist
+$ npm install eslint --save-dev
+$ npm init @eslint/config
+```
+
 ## Configuration
 
 Initialize the package
