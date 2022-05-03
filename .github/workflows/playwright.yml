@@ -23,6 +23,8 @@ jobs:
       run: npm install -g newman-reporter-htmlextra 
     - name: Run Playwright Backend Tests
       run: npm run testBackend
+    - name: Run Playwright Frontend Tests
+      run: npm run testFrontend01
     - uses: actions/upload-artifact@v2
       if: always()
       with:
