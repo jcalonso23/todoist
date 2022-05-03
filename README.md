@@ -17,30 +17,31 @@ todoist/
      | reports/
   | frontend/
 ```
-
 - Install newman
 ```bash
 $ cd todoist/
 $ npm install -g newman
 ```
-
 - Install Playwright
 ```bash
 $ cd todoist/frontend/
 $ npm init playwright@latest
 ```
-
 - Install ESLint
 ```bash
 $ cd todoist/
 $ npm install eslint --save-dev
 $ npm init @eslint/config
 ```
-
 - Install htmlextra
 ```bash
 $ cd todoist/
 $ npm install -g newman-reporter-htmlextra
+```
+- Install dotenv
+```bash
+$ cd todoist/
+$ npm install dotenv --save
 ```
 
 ## Configuration

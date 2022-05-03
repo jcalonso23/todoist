@@ -21,6 +21,8 @@ jobs:
       run: npx playwright install
     - name: Install htmlextra
       run: npm install -g newman-reporter-htmlextra 
+    - name: Install dotenv
+      run: npm install dotenv --save
     - name: Run Playwright Backend Tests
       run: npm run testBackend
     - name: Run Playwright Frontend Tests
