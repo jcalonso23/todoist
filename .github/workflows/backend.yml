@@ -15,24 +15,10 @@ jobs:
         node-version: '14.x'
     - name: Install Newman
       run: npm install -g newman
-    - name: Install Playwright Test
-      run: npm install -D @playwright/test
-    - name: Install Playwright
-      run: npx playwright install
     - name: Install htmlextra
       run: npm install -g newman-reporter-htmlextra 
-    - name: Install dotenv
-      run: npm install dotenv --save
     - name: Run Playwright Backend Tests
       run: npm run testBackend
-    - name: Run Playwright testFrontend01
-      run: npm run testFrontend01
-    - name: Run Playwright testFrontend02
-      run: npm run testFrontend02
-    #- name: Run Playwright testFrontend03
-    #  run: npm run testFrontend03
-    - name: Run Playwright testFrontend04
-      run: npm run testFrontend04
     - uses: actions/upload-artifact@v2
       if: always()
       with:
