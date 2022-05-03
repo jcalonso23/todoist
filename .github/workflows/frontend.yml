@@ -29,8 +29,8 @@ jobs:
       run: npm run testFrontend02
     - name: Clean cache
       run: npm cache clean --force
-    - name: Run Playwright testFrontend03
-      run: npm run testFrontend03
+#    - name: Run Playwright testFrontend03
+#      run: npm run testFrontend03
 #    - name: Run Playwright testFrontend04
 #      run: npm run testFrontend04
     - uses: actions/upload-artifact@v2
