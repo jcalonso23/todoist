@@ -16,7 +16,7 @@ test('Create a New Task', async ({ page }) => {
   await expect(todoistDev.page).toHaveTitle("Today: Todoist");
   console.log('Log In Success!')
 
-  await page.click('button.empty-state-button');
+  await page.click('text=Add a task');
   await todoistDev.createTask(1);
   console.log('Task created successfully!');
 
