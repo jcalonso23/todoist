@@ -25,8 +25,14 @@ jobs:
       run: npm install dotenv --save
     - name: Run Playwright Backend Tests
       run: npm run testBackend
-    - name: Run Playwright Frontend Tests
+    - name: Run Playwright testFrontend01
       run: npm run testFrontend01
+    - name: Run Playwright testFrontend02
+      run: npm run testFrontend02
+    - name: Run Playwright testFrontend03
+      run: npm run testFrontend03
+    - name: Run Playwright testFrontend04
+      run: npm run testFrontend04
     - uses: actions/upload-artifact@v2
       if: always()
       with:
