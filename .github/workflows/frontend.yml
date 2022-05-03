@@ -21,8 +21,8 @@ jobs:
       run: npm install dotenv --save
     - name: Run Playwright testFrontend01
       run: npm run testFrontend01
-    - name: Run Playwright testFrontend02
-      run: npm run testFrontend02
+#    - name: Run Playwright testFrontend02
+#      run: npm run testFrontend02
     - name: Clean cache
       run: npm cache clean --force
     - name: Run Playwright testFrontend03
