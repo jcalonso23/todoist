@@ -32,9 +32,15 @@ $ npm init playwright@latest
 
 - Install ESLint
 ```bash
-$ cd todoist
+$ cd todoist/
 $ npm install eslint --save-dev
 $ npm init @eslint/config
+```
+
+- Install htmlextra
+```bash
+$ cd todoist/
+$ npm install -g newman-reporter-htmlextra
 ```
 
 ## Configuration
