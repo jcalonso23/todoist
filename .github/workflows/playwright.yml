@@ -13,12 +13,12 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14.x'
-    - name: Install Playwright
+    - name: Install Playwright Test
       run: npm install -D @playwright/test
-    - name: Install Again Playwright
+    - name: Install Playwright
       run: npx playwright install 
-    - name: Run Playwright tests
-      run: npx playwright test ./frontend/tests/01_successful_login.spec.js
+    - name: Run Playwright Backend Tests
+      run: npm run testBackend
     - uses: actions/upload-artifact@v2
       if: always()
       with:
