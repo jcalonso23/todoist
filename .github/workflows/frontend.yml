@@ -23,8 +23,8 @@ jobs:
       run: npm run testFrontend01
     - name: Run Frontend Test 02
       run: npm run testFrontend02
-#    - name: Run Frontend Test 03
-#      run: npm run testFrontend03
+    - name: Run Frontend Test 03
+      run: npm run testFrontend03
 #    - name: Run Frontend Test 04
 #      run: npm run testFrontend04
     - uses: actions/upload-artifact@v2
