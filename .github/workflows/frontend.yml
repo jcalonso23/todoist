@@ -1,11 +1,11 @@
-name: Playwright Tests
+name: Frontend Tests
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 jobs:
-  test:
+  frontend:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -13,25 +13,19 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14.x'
-    - name: Clean cache
-      run: npm cache clean --force
     - name: Install Playwright Test
       run: npm install -D @playwright/test
     - name: Install Playwright
       run: npx playwright install
     - name: Install dotenv
       run: npm install dotenv --save
-    - name: Run Playwright testFrontend01
+    - name: Run Frontend Test 01
       run: npm run testFrontend01
-    - name: Clean cache
-      run: npm cache clean --force
-    - name: Run Playwright testFrontend02
+    - name: Run Frontend Test 02
       run: npm run testFrontend02
-    - name: Clean cache
-      run: npm cache clean --force
-#    - name: Run Playwright testFrontend03
+#    - name: Run Frontend Test 03
 #      run: npm run testFrontend03
-#    - name: Run Playwright testFrontend04
+#    - name: Run Frontend Test 04
 #      run: npm run testFrontend04
     - uses: actions/upload-artifact@v2
       if: always()
