@@ -2,6 +2,12 @@
 // @ts-check
 const { devices } = require('@playwright/test');
 
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+require('dotenv').config();
+
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   testDir: 'tests',

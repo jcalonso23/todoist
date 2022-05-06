@@ -6,7 +6,7 @@
   "scripts": {
     "testBackend": "npx newman run './backend/collection/todoist.postman_collection.json' -e './backend/environment/todoist_env.postman_environment.json' -r htmlextra --reporter-htmlextra-export",
     "testFrontend": "cd ./frontend && npx playwright test tests/todoist_tests.spec.js --project=chromium",
-    "testBrowserStack": "cd ./frontend && BROWSERSTACK_LOCAL=true npx playwright test tests/01_successful_login.spec.js --config=./playwright-local.config.js --project='chrome@latest:Windows 10@browserstack'"
+    "testBrowserStack": "cd ./frontend && BROWSERSTACK_LOCAL=true npx playwright test tests/todoist_tests.spec.js --config=./playwright-local.config.js --project='chrome@latest:Windows 10@browserstack'"
   },
   "author": "Juan Carlos Alonso",
   "license": "ISC",
