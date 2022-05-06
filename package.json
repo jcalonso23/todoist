@@ -1,19 +1,18 @@
 {
   "name": "todoist",
   "version": "1.0.0",
-  "description": "",
+  "description": "QA Challenge",
   "main": "index.js",
   "scripts": {
     "testBackend": "npx newman run './backend/collection/todoist.postman_collection.json' -e './backend/environment/todoist_env.postman_environment.json' -r htmlextra --reporter-htmlextra-export",
-    "testFrontend01": "cd ./frontend && npx playwright test tests/01_successful_login.spec.js --project=chromium",
-    "testFrontend02": "cd ./frontend && npx playwright test tests/02_unsuccessful_login.spec.js --project=chromium",
-    "testFrontend03": "cd ./frontend && npx playwright test tests/03_create_task.spec.js --project=chromium",
-    "testFrontend04": "cd ./frontend && npx playwright test tests/04_create_10_tasks.spec.js --project=chromium"
+    "testFrontend": "cd ./frontend && npx playwright test tests/todoist_tests.spec.js --project=chromium",
+    "testBrowserStack": "cd ./frontend && BROWSERSTACK_LOCAL=true npx playwright test tests/01_successful_login.spec.js --config=./playwright-local.config.js --project='chrome@latest:Windows 10@browserstack'"
   },
-  "author": "",
+  "author": "Juan Carlos Alonso",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.21.1",
-    "eslint": "^8.14.0"
+    "eslint": "^8.14.0",
+    "browserstack-local": "^1.4.8"
   }
 }

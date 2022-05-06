@@ -1,7 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const { TodoistDevPage } = require('./todoist_dev_page');
+test.describe.configure({ mode: 'parallel' });
 
-// Test - 01
+// Test 01 - Login to Todoist
 test('Todoist Login Success', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
@@ -18,7 +19,7 @@ test('Todoist Login Success', async ({ page }) => {
   console.log('Log In Success!')
 });
 
-// Test - 02
+// Test 02 - Negative Login to Todoist 1st Attempt
 test('Todoist Login 1st Attempt', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
@@ -36,7 +37,7 @@ test('Todoist Login 1st Attempt', async ({ page }) => {
 
 });
 
-// Test - 03
+// Test 03 - Negative Login to Todoist 2nd Attempt
 test('Todoist Login 2nd Attempt', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
@@ -54,7 +55,7 @@ test('Todoist Login 2nd Attempt', async ({ page }) => {
 
 });
 
-// Test - 04
+// Test 04 - Negative Login to Todoist 3rd Attempt
 test('Todoist Login 3rd Attempt', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
@@ -72,7 +73,7 @@ test('Todoist Login 3rd Attempt', async ({ page }) => {
 
 });
 
-// Test - 05
+// Test 05 - Create a New Task
 test('Create a New Task', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
@@ -94,7 +95,7 @@ test('Create a New Task', async ({ page }) => {
 
 });
 
-// Test - 06
+// Test 06 - Create 10 Tasks
 test('Create 10 Tasks', async ({ page }) => {
   const todoistDev = new TodoistDevPage(page);
 
