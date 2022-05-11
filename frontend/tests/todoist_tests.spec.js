@@ -4,6 +4,7 @@ test.describe.configure({ mode: 'parallel' });
 
 // Test 01 - Login to Todoist
 test('Todoist Login Success', async ({ page }) => {
+  console.log('Test 1')
   const todoistDev = new TodoistDevPage(page);
 
   console.log('Log In to Todoist...');
@@ -21,6 +22,7 @@ test('Todoist Login Success', async ({ page }) => {
 
 // Test 02 - Negative Login to Todoist 1st Attempt
 test('Todoist Login 1st Attempt', async ({ page }) => {
+  console.log('Test 2')
   const todoistDev = new TodoistDevPage(page);
 
   console.log('Log In 1st Attempt...');
@@ -39,6 +41,7 @@ test('Todoist Login 1st Attempt', async ({ page }) => {
 
 // Test 03 - Negative Login to Todoist 2nd Attempt
 test('Todoist Login 2nd Attempt', async ({ page }) => {
+  console.log('Test 3')
   const todoistDev = new TodoistDevPage(page);
 
   console.log('Log In 2nd Attempt...');
@@ -57,6 +60,7 @@ test('Todoist Login 2nd Attempt', async ({ page }) => {
 
 // Test 04 - Negative Login to Todoist 3rd Attempt
 test('Todoist Login 3rd Attempt', async ({ page }) => {
+  console.log('Test 4')
   const todoistDev = new TodoistDevPage(page);
 
   console.log('Log In 3rd Attempt...');
@@ -75,6 +79,7 @@ test('Todoist Login 3rd Attempt', async ({ page }) => {
 
 // Test 05 - Create a New Task
 test('Create a New Task', async ({ page }) => {
+  console.log('Test 5')
   const todoistDev = new TodoistDevPage(page);
 
   console.log('Log In to Todoist...');
@@ -97,6 +102,7 @@ test('Create a New Task', async ({ page }) => {
 
 // Test 06 - Create 10 Tasks
 //test('Create 10 Tasks', async ({ page }) => {
+//  console.log('Test 6')
 //  const todoistDev = new TodoistDevPage(page);
 
 //  console.log('Log In to Todoist...');
