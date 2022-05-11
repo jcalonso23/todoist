@@ -75,8 +75,5 @@ $ npm run testBackend
 To execute tests:
 ```bash
 $ cd todoist/
-$ npm tun testFrontend01
-$ npm tun testFrontend02
-$ npm tun testFrontend03
-$ npm tun testFrontend04
+$ npm tun testFrontend
 ```
