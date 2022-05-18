@@ -8,7 +8,7 @@ test('Todoist Login Success', async ({ page }) => {
 
   console.log('Log In to Todoist...');
   await todoistDev.goto();
-  await expect(todoistDev.page).toHaveTitle("Todoist: The to do list to organize work & life");
+  await expect(todoistDev.page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
   await todoistDev.gotoLoginPage();
   await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
@@ -25,7 +25,7 @@ test('Todoist Login 1st Attempt', async ({ page }) => {
 
   console.log('Log In 1st Attempt...');
   await todoistDev.goto();
-  await expect(page).toHaveTitle("Todoist: The to do list to organize work & life");
+  await expect(page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
   await todoistDev.gotoLoginPage();
   await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
@@ -43,7 +43,7 @@ test('Todoist Login 2nd Attempt', async ({ page }) => {
 
   console.log('Log In 2nd Attempt...');
   await todoistDev.goto();
-  await expect(page).toHaveTitle("Todoist: The to do list to organize work & life");
+  await expect(page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
   await todoistDev.gotoLoginPage();
   await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
@@ -61,7 +61,7 @@ test('Todoist Login 3rd Attempt', async ({ page }) => {
 
   console.log('Log In 3rd Attempt...');
   await todoistDev.goto();
-  await expect(page).toHaveTitle("Todoist: The to do list to organize work & life");
+  await expect(page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
   await todoistDev.gotoLoginPage();
   await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
@@ -79,7 +79,7 @@ test('Todoist Login 3rd Attempt', async ({ page }) => {
 
 //  console.log('Log In to Todoist...');
 //  await todoistDev.goto();
-//  await expect(todoistDev.page).toHaveTitle("Todoist: The to do list to organize work & life");
+//  await expect(todoistDev.page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
 //  await todoistDev.gotoLoginPage();
 //  await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
@@ -101,7 +101,7 @@ test('Todoist Login 3rd Attempt', async ({ page }) => {
 
 //  console.log('Log In to Todoist...');
 //  await todoistDev.goto();
-//  await expect(todoistDev.page).toHaveTitle("Todoist: The to do list to organize work & life");
+//  await expect(todoistDev.page).toHaveTitle("Todoist | A To-Do List to Organize Your Work & Life");
 
 //  await todoistDev.gotoLoginPage();
 //  await expect(todoistDev.page).toHaveTitle("Log in to Todoist");
